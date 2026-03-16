@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EE/jaFW68aE=",
+  "dgSpecHash": "2yl/df8eKwk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
-    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512",
-    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512",
-    "C:\\Users\\gabri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.25\\microsoft.netcore.app.host.win-x64.8.0.25.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\anton\\OneDrive\\Documentos\\Compiladores-2026.1\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
