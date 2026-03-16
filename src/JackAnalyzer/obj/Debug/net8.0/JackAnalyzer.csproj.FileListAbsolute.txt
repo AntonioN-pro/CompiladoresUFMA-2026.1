@@ -1,0 +1,15 @@
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\bin\Debug\net8.0\JackAnalyzer.exe
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\bin\Debug\net8.0\JackAnalyzer.deps.json
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\bin\Debug\net8.0\JackAnalyzer.runtimeconfig.json
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\bin\Debug\net8.0\JackAnalyzer.dll
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\bin\Debug\net8.0\JackAnalyzer.pdb
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.AssemblyInfoInputs.cache
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.AssemblyInfo.cs
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.sourcelink.json
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.dll
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\refint\JackAnalyzer.dll
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.pdb
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\JackAnalyzer.genruntimeconfig.cache
+C:\Users\anton\OneDrive\Documentos\Compiladores-2026.1\CompiladoresUFMA-2026.1\src\JackAnalyzer\obj\Debug\net8.0\ref\JackAnalyzer.dll
