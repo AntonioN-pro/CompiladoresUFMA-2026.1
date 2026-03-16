@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JackAnalyzer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4dd1b5308cbf2713eb4c740cc3178bec2301274d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+021888dd70099ddd8600fc77ede1cc59717a90eb")]
 [assembly: System.Reflection.AssemblyProductAttribute("JackAnalyzer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JackAnalyzer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
