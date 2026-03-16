@@ -1,21 +1,20 @@
 ﻿using JackAnalyzer;
 using System.Text;
 
-if (args.Length == 0)
+if (args.Length == 0 || args.Length > 2)
 {
-    Console.WriteLine("Uso: dotnet run -- <arquivo.jack>");
+    Console.WriteLine("Uso: dotnet run -- <arquivo.jack> [diretorio_saida]");
     return;
 }
 
 string inputPath = args[0];
+string outputDir = args.Length > 1 ? args[1] : Path.GetDirectoryName(inputPath) ?? ".";
 
 if (File.Exists(inputPath))
 {
     JackTokenizer tokenizer = new JackTokenizer(inputPath);
     
     // Gera o nome do arquivo de saída
-    string? dirInfo = Path.GetDirectoryName(inputPath);
-    string outputDir = dirInfo ?? ".";
     string outputPath = Path.Combine(
         outputDir,
         Path.GetFileNameWithoutExtension(inputPath) + "T.xml"
@@ -53,7 +52,7 @@ if (File.Exists(inputPath))
     
     sb.AppendLine("</tokens>");
     
-    File.WriteAllText(outputPath, sb.ToString());
+    File.WriteAllText(outputPath, sb.ToString(), Encoding.UTF8);
     Console.WriteLine($"✓ Arquivo gerado: {outputPath}");
 }
 else
