@@ -71,6 +71,9 @@ Para analisar um arquivo `.jack` específico:
 dotnet run -- <caminho_do_arquivo.jack> [diretorio_saida]
 ```
 
+- `caminho_do_arquivo.jack`: caminho completo ou relativo para o arquivo Jack.
+- `diretorio_saida` (opcional): pasta onde serão gravados os arquivos de saída `.xml`.
+
 **Exemplos:**
 
 ```bash
@@ -80,6 +83,21 @@ dotnet run -- "C:\caminho\para\Main.jack"
 # Com diretório de saída personalizado
 dotnet run -- "C:\caminho\para\Main.jack" "C:\caminho\para\resultado"
 ```
+
+**Exemplo específico para o projeto Square:**
+
+```powershell
+cd "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\src\JackAnalyzer"
+dotnet run -- "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
+```
+
+Se quiser rodar a partir da raiz do repositório sem mudar de pasta:
+
+```powershell
+dotnet run --project "src/JackAnalyzer/JackAnalyzer.csproj" -- "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
+```
+
+> O comando gera um arquivo `.xml` com os tokens no mesmo diretório do `.jack`, normalmente chamado `MainT.xml`.
 
 #### Processamento em Lote
 
