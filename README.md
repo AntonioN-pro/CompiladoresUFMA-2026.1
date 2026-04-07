@@ -72,7 +72,7 @@ dotnet run -- <caminho_do_arquivo.jack> [diretorio_saida]
 ```
 
 - `caminho_do_arquivo.jack`: caminho completo ou relativo para o arquivo Jack.
-- `diretorio_saida` (opcional): pasta onde serão gravados os arquivos de saída `.xml`.
+- `diretorio_saida` (opcional): pasta onde serão gravados os arquivos de saída `.xml`. Se omitido, usa o mesmo diretório do arquivo `.jack`.
 
 **Exemplos:**
 
@@ -87,39 +87,38 @@ dotnet run -- "C:\caminho\para\Main.jack" "C:\caminho\para\resultado"
 **Exemplo específico para o projeto Square:**
 
 ```powershell
-cd "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\src\JackAnalyzer"
-dotnet run -- "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
+cd "src\JackAnalyzer"
+dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
 ```
 
-Se quiser rodar a partir da raiz do repositório sem mudar de pasta:
+#### Processamento em Lote (Múltiplos Arquivos)
 
-```powershell
-dotnet run --project "src/JackAnalyzer/JackAnalyzer.csproj" -- "C:\Users\gabri\OneDrive\Documentos\GitHub\CompiladoresUFMA-2026.1\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
-```
-
-> O comando gera um arquivo `.xml` com os tokens no mesmo diretório do `.jack`, normalmente chamado `MainT.xml`.
-
-#### Processamento em Lote
-
-Para processar todos os arquivos `.jack` de uma pasta:
-
-```powershell
-# Windows PowerShell
-.\process_square.ps1
-```
-
-Ou manualmente:
+Para processar **todos os arquivos `.jack` de uma pasta de uma vez** e gerar os tokens em uma **pasta separada**:
 
 ```bash
-# Processar Main.jack
-dotnet run -- "projects/10/Square/Main.jack" "resultado"
-
-# Processar SquareGame.jack
-dotnet run -- "projects/10/Square/SquareGame.jack" "resultado"
-
-# Processar Square.jack
-dotnet run -- "projects/10/Square/Square.jack" "resultado"
+dotnet run -- <caminho_da_pasta> [diretorio_saida]
 ```
+
+- `caminho_da_pasta`: diretório contendo os arquivos `.jack`
+- `diretorio_saida` (opcional): pasta de destino. Se omitido, cria uma subpasta `tokens` automaticamente no mesmo diretório.
+
+**Exemplos:**
+
+```powershell
+# Processa todos os .jack do Square em uma pasta "tokens" criada automaticamente
+cd "src\JackAnalyzer"
+dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square"
+
+# Especificar pasta de saída personalizada
+dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square" "C:\resultado\tokens"
+```
+
+**Resultado:**
+- MainT.xml
+- SquareT.xml  
+- SquareGameT.xml
+
+Serão gerados em `projects/10/Square/tokens/` ou no local especificado.
 
 ### Verificação dos Resultados
 
@@ -140,7 +139,21 @@ Comparison ended successfully
 
 ### Estrutura de Arquivos Gerados
 
-Após a execução, serão criados arquivos `.xml` com a seguinte estrutura:
+Após processar a pasta Square, serão criados arquivos `.xml` em uma pasta `tokens`:
+
+```
+Square/
+├── Main.jack
+├── Square.jack
+├── SquareGame.jack
+├── tokens/                    # Pasta criada automaticamente
+│   ├── MainT.xml            # Tokens do Main.jack
+│   ├── SquareT.xml          # Tokens do Square.jack
+│   └── SquareGameT.xml       # Tokens do SquareGame.jack
+└── *.xml                     # Arquivos de referência (Main.xml, Square.xml, SquareGame.xml)
+```
+
+Exemplo de conteúdo de um arquivo gerado:
 
 ```xml
 <tokens>
@@ -159,7 +172,6 @@ Após a execução, serão criados arquivos `.xml` com a seguinte estrutura:
 CompiladoresUFMA-2026.1/
 ├── README.md                          # Este arquivo
 ├── CompiladoresUFMA-2026.1.sln        # Solução Visual Studio
-├── process_square.ps1                 # Script para processamento em lote
 ├── nand2tetris/                       # Arquivos do projeto nand2tetris
 │   └── projects/
 │       └── 10/
@@ -171,11 +183,13 @@ CompiladoresUFMA-2026.1/
 │               ├── Main.jack
 │               ├── Square.jack
 │               ├── SquareGame.jack
-│               ├── resultado/         # Pasta para arquivos gerados
+│               ├── tokens/            # Pasta com arquivos gerados pelo analisador
 │               │   ├── MainT.xml
 │               │   ├── SquareT.xml
 │               │   └── SquareGameT.xml
-│               └── *.xml             # Arquivos de referência
+│               ├── Main.xml           # Arquivos de referência para análise sintática
+│               ├── Square.xml
+│               └── SquareGame.xml
 └── src/
     └── JackAnalyzer/                  # Projeto C#
         ├── JackAnalyzer.csproj       # Arquivo de projeto
