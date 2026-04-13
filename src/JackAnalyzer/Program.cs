@@ -10,7 +10,7 @@ if (args.Length == 0 || args.Length > 2)
 }
 
 string inputPath = args[0];
-string outputDir = args.Length > 1 ? args[1] : null;
+string? outputDir = args.Length > 1 ? args[1] : null;
 
 // Verifica se é um arquivo ou diretório
 if (File.Exists(inputPath))
@@ -50,7 +50,7 @@ else
     Console.WriteLine("Arquivo ou diretório não encontrado.");
 }
 
-void ProcessarArquivo(string filePath, string outputDir)
+void ProcessarArquivo(string filePath, string? outputDir)
 {
     if (outputDir == null)
     {
@@ -87,7 +87,6 @@ void ProcessarArquivo(string filePath, string outputDir)
         };
         
         // Escapa caracteres especiais XML
-        string escapedValue = System.Xml.XmlConvert.EncodeName(value);
         value = value.Replace("&", "&amp;")
                      .Replace("<", "&lt;")
                      .Replace(">", "&gt;");

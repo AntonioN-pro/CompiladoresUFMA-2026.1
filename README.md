@@ -18,7 +18,7 @@ A implementação foi desenvolvida com base conceitual fornecida em aula, sendo 
 ## Linguagem e Tecnologias
 
 - C#
-- .NET
+- .NET 10.0
 
 ---
 
@@ -46,28 +46,42 @@ A implementação foi desenvolvida com base conceitual fornecida em aula, sendo 
 
 ### Pré-requisitos
 
-- **.NET 8.0** ou superior instalado
+- **.NET 10.0** ou superior instalado
 - Sistema operacional: Windows, Linux ou macOS
 
 ### Compilação
 
-1. Navegue até o diretório do projeto:
-   ```bash
-   cd src/JackAnalyzer
-   ```
+A partir da raiz do repositório:
+```bash
+dotnet build src/JackAnalyzer/JackAnalyzer.csproj
+```
 
-2. Compile o projeto:
-   ```bash
-   dotnet build
-   ```
+ou, alternadamente, entre no diretório do projeto:
+```bash
+cd src/JackAnalyzer
+dotnet build
+```
+
+### Ambiente de teste
+
+- .NET SDK 10.0.201 instalado
+- Projeto compilado com `dotnet build src/JackAnalyzer/JackAnalyzer.csproj`
+- Validação realizada em `nand2tetris/nand2tetris/projects/10/Square`
 
 ### Execução
 
 #### Arquivo Individual
 
-Para analisar um arquivo `.jack` específico:
+Para analisar um arquivo `.jack` específico, execute a partir da raiz do repositório:
 
 ```bash
+dotnet run --project src/JackAnalyzer/JackAnalyzer.csproj -- <caminho_do_arquivo.jack> [diretorio_saida]
+```
+
+ou, se estiver dentro do diretório do projeto:
+
+```bash
+cd src/JackAnalyzer
 dotnet run -- <caminho_do_arquivo.jack> [diretorio_saida]
 ```
 
@@ -78,17 +92,17 @@ dotnet run -- <caminho_do_arquivo.jack> [diretorio_saida]
 
 ```bash
 # Análise básica (arquivo de saída no mesmo diretório do .jack)
-dotnet run -- "C:\caminho\para\Main.jack"
+dotnet run --project src/JackAnalyzer/JackAnalyzer.csproj -- "C:\caminho\para\Main.jack"
 
 # Com diretório de saída personalizado
-dotnet run -- "C:\caminho\para\Main.jack" "C:\caminho\para\resultado"
+dotnet run --project src/JackAnalyzer/JackAnalyzer.csproj -- "C:\caminho\para\Main.jack" "C:\caminho\para\resultado"
 ```
 
 **Exemplo específico para o projeto Square:**
 
 ```powershell
 cd "src\JackAnalyzer"
-dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
+dotnet run -- "..\..\nand2tetris\nand2tetris\projects\10\Square\Main.jack"
 ```
 
 #### Processamento em Lote (Múltiplos Arquivos)
@@ -107,10 +121,10 @@ dotnet run -- <caminho_da_pasta> [diretorio_saida]
 ```powershell
 # Processa todos os .jack do Square em uma pasta "tokens" criada automaticamente
 cd "src\JackAnalyzer"
-dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square"
+dotnet run -- "..\..\nand2tetris\nand2tetris\projects\10\Square"
 
 # Especificar pasta de saída personalizada
-dotnet run -- "..\..\..\nand2tetris\nand2tetris\projects\10\Square" "C:\resultado\tokens"
+dotnet run -- "..\..\nand2tetris\nand2tetris\projects\10\Square" "C:\resultado\tokens"
 ```
 
 **Resultado:**
@@ -126,7 +140,7 @@ Para verificar se os arquivos gerados estão corretos, use o **TextComparer**:
 
 ```bash
 # Navegue até a pasta tools
-cd nand2tetris/tools
+cd nand2tetris/nand2tetris/tools
 
 # Compare com arquivo de referência
 .\TextComparer.bat "caminho/arquivo_gerado.xml" "caminho/arquivo_referencia.xml"
@@ -171,7 +185,6 @@ Exemplo de conteúdo de um arquivo gerado:
 ```
 CompiladoresUFMA-2026.1/
 ├── README.md                          # Este arquivo
-├── CompiladoresUFMA-2026.1.sln        # Solução Visual Studio
 ├── nand2tetris/                       # Arquivos do projeto nand2tetris
 │   └── projects/
 │       └── 10/
