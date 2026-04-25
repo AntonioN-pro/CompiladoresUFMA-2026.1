@@ -12,38 +12,35 @@ if (args.Length == 0 || args.Length > 2)
 string inputPath = args[0];
 string? outputDir = args.Length > 1 ? args[1] : null;
 
-// Verifica se é um arquivo ou diretório
 if (File.Exists(inputPath))
 {
-    // Processa um único arquivo
     ProcessarArquivo(inputPath, outputDir);
 }
 else if (Directory.Exists(inputPath))
 {
-    // Processa todos os arquivos .jack do diretório
     if (outputDir == null)
     {
-        outputDir = Path.Combine(inputPath, "tokens");
+        outputDir = inputPath;
     }
-    
+
     Directory.CreateDirectory(outputDir);
-    
+
     var arquivos = Directory.GetFiles(inputPath, "*.jack");
-    
+
     if (arquivos.Length == 0)
     {
         Console.WriteLine("Nenhum arquivo .jack encontrado");
         return;
     }
-    
+
     Console.WriteLine($"Processando {arquivos.Length} arquivo(s)...\n");
-    
+
     foreach (var arquivo in arquivos)
     {
         ProcessarArquivo(arquivo, outputDir);
     }
-    
-    Console.WriteLine($"\n✓ Todos os arquivos foram processados em: {outputDir}");
+
+    Console.WriteLine($"\nTodos os arquivos foram processados em: {outputDir}");
 }
 else
 {
@@ -56,26 +53,42 @@ void ProcessarArquivo(string filePath, string? outputDir)
     {
         outputDir = Path.GetDirectoryName(filePath) ?? ".";
     }
-    
+
     Directory.CreateDirectory(outputDir);
-    
-    JackTokenizer tokenizer = new JackTokenizer(filePath);
-    
-    // Gera o nome do arquivo de saída
-    string outputPath = Path.Combine(
+
+    string tokenOutputPath = Path.Combine(
         outputDir,
         Path.GetFileNameWithoutExtension(filePath) + "T.xml"
     );
-    
+
+    string parserOutputPath = Path.Combine(
+        outputDir,
+        Path.GetFileNameWithoutExtension(filePath) + ".xml"
+    );
+
+    GerarTokens(filePath, tokenOutputPath);
+
+    var reader = new TokenXmlReader();
+    var tokens = reader.ReadTokens(tokenOutputPath);
+
+    var parser = new CompilationEngine(tokens);
+    parser.CompileToFile(parserOutputPath);
+
+    Console.WriteLine($"{Path.GetFileName(filePath)} → {Path.GetFileName(tokenOutputPath)} e {Path.GetFileName(parserOutputPath)}");
+}
+
+void GerarTokens(string filePath, string outputPath)
+{
+    JackTokenizer tokenizer = new JackTokenizer(filePath);
+
     var sb = new StringBuilder();
     sb.AppendLine("<tokens>");
-    
+
     while (tokenizer.HasMoreTokens())
     {
         string value = tokenizer.GetCurrentValue();
         TokenType type = tokenizer.GetCurrentType();
-        
-        // Converte enum para tag XML
+
         string tagName = type switch
         {
             TokenType.KEYWORD => "keyword",
@@ -85,19 +98,18 @@ void ProcessarArquivo(string filePath, string? outputDir)
             TokenType.IDENTIFIER => "identifier",
             _ => "unknown"
         };
-        
-        // Escapa caracteres especiais XML
+
         value = value.Replace("&", "&amp;")
                      .Replace("<", "&lt;")
-                     .Replace(">", "&gt;");
-        
+                     .Replace(">", "&gt;")
+                     .Replace("\"", "&quot;");
+
         sb.AppendLine($"<{tagName}> {value} </{tagName}>");
-        
+
         tokenizer.Advance();
     }
-    
+
     sb.AppendLine("</tokens>");
-    
+
     File.WriteAllText(outputPath, sb.ToString(), Encoding.UTF8);
-    Console.WriteLine($"✓ {Path.GetFileName(filePath)} → {Path.GetFileName(outputPath)}");
 }
