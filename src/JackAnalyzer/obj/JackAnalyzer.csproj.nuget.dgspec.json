@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\antonio.neto\\Documents\\comp\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj": {}
+    "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\antonio.neto\\Documents\\comp\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj": {
+    "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\antonio.neto\\Documents\\comp\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
+        "projectUniqueName": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
         "projectName": "JackAnalyzer",
-        "projectPath": "C:\\Users\\antonio.neto\\Documents\\comp\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
-        "packagesPath": "C:\\Users\\antonio.neto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\antonio.neto\\Documents\\comp\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\obj\\",
+        "projectPath": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\JackAnalyzer.csproj",
+        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\CompiladoresUFMA-2026.1\\src\\JackAnalyzer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\antonio.neto\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
