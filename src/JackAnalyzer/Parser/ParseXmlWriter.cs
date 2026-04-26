@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace JackAnalyzer;
+namespace JackAnalyzer.Parser;
 
 public sealed class ParseXmlWriter
 {

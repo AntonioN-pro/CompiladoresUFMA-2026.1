@@ -1,4 +1,4 @@
-namespace JackAnalyzer;
+namespace JackAnalyzer.Parser;
 
 public sealed class CompilationEngine
 {

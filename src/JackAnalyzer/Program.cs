@@ -1,4 +1,5 @@
-﻿using JackAnalyzer;
+﻿using JackAnalyzer.Lexer;
+using JackAnalyzer.Parser;
 using System.Text;
 
 if (args.Length == 0 || args.Length > 2)
