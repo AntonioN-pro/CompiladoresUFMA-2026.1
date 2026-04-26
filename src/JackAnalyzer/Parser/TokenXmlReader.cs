@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace JackAnalyzer;
+namespace JackAnalyzer.Parser;
 
 public class TokenXmlReader
 {

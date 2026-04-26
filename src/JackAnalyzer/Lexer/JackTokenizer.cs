@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace JackAnalyzer;
+namespace JackAnalyzer.Lexer;
 
 public class JackTokenizer
 {

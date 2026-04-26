@@ -1,4 +1,4 @@
-namespace JackAnalyzer;
+namespace JackAnalyzer.Lexer;
 
 public enum TokenType
 {
