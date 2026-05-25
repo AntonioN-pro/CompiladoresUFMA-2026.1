@@ -1,8 +1,12 @@
-# Analisador Léxico e Sintático para a Linguagem Jack (nand2tetris)
+# Compilador Jack para XML e VM (nand2tetris)
 
 ## Descrição
 
-Este projeto tem como objetivo implementar um **analisador léxico (scanner)** e um **analisador sintático (parser)** para a linguagem **Jack**, utilizando **C#**.
+Este projeto implementa, em C#, as etapas principais do compilador da linguagem Jack propostas no nand2tetris:
+
+- análise léxica (scanner)
+- análise sintática (parser)
+- geração de código intermediário para a máquina virtual Hack (arquivos .vm)
 
 O programa é capaz de:
 
@@ -10,27 +14,20 @@ O programa é capaz de:
 2. Identificar os tokens da linguagem (análise léxica)
 3. Validar a estrutura do programa conforme a gramática Jack (análise sintática)
 4. Gerar arquivos `.xml` compatíveis com o padrão do projeto nand2tetris
+5. Gerar arquivos `.vm` compatíveis com o VM Emulator oficial do curso
 
 A implementação foi desenvolvida com base conceitual fornecida em aula, sendo o código totalmente autoral.
 
 ---
 
-## Próxima Tarefa (Capítulo 11)
+## Status da Implementação
 
-Implementar o **gerador de código intermediário** para a linguagem **Jack**, responsável por traduzir a estrutura sintática analisada nas etapas anteriores para código da máquina virtual (`.vm`), compatível com o **VM Emulator** oficial do nand2tetris.
+Etapa concluída:
 
-Escopo planejado desta etapa:
+- Capítulo 10: geração de XML de tokens e árvore sintática
+- Capítulo 11: geração de código VM a partir de Jack
 
-1. Integrar a etapa de geração de código ao fluxo atual (Lexer + Parser + Code Generator)
-2. Produzir arquivos `.vm` a partir de arquivos `.jack`
-3. Implementar suporte às construções da linguagem Jack exigidas no projeto 11:
-  - Declarações de classe e sub-rotinas (`constructor`, `function`, `method`)
-  - Variáveis de classe e locais (`static`, `field`, `argument`, `var`)
-  - Comandos `let`, `if`, `while`, `do` e `return`
-  - Expressões, termos, chamadas de função/método e acesso a arrays
-4. Validar a saída `.vm` com os testes oficiais (`Average`, `Seven`, `ConvertToBin`, `Square`, `Pong`, etc.)
-
-Observação: nesta fase, a saída principal passa a ser o arquivo `.vm`; a geração de XML pode ser mantida como apoio de depuração.
+Observação: a geração de XML foi mantida para apoio de depuração e comparação com os arquivos de referência.
 
 ---
 
@@ -52,6 +49,12 @@ Observação: nesta fase, a saída principal passa a ser o arquivo `.vm`; a gera
 
 ```
 src/JackAnalyzer/
+  CodeGen/
+    SymbolKind.cs         # Categorias de símbolo (static, field, argument, var)
+    SymbolTable.cs        # Tabela de símbolos por escopo (classe e sub-rotina)
+    VmSegment.cs          # Segmentos da VM Hack
+    VmWriter.cs           # Escrita dos comandos VM
+    VmCompilationEngine.cs # Compilação Jack -> VM
   Lexer/
     JackTokenizer.cs      # Leitura e tokenização dos arquivos .jack
     TokenType.cs          # Enum com os tipos de token (KEYWORD, SYMBOL, etc.)
@@ -60,7 +63,7 @@ src/JackAnalyzer/
     ParserToken.cs        # Tipo que representa um token para o parser
     ParseXmlWriter.cs     # Escrita do XML de saída com indentação e escape
     TokenXmlReader.cs     # Leitura do XML de tokens gerado pelo Lexer
-  Program.cs              # Ponto de entrada — orquestra Lexer e Parser
+  Program.cs              # Ponto de entrada — orquestra Lexer, Parser e CodeGen
 ```
 
 ---
@@ -119,6 +122,30 @@ O fluxo interno é:
 
 ---
 
+### Gerador de Código VM (`CodeGen/`)
+
+O gerador consome a lista de tokens já validada pelo parser e produz código da máquina virtual Hack.
+
+Recursos implementados:
+
+- Escopos e símbolos:
+  - `static`, `field`, `argument`, `var`
+- Sub-rotinas:
+  - `constructor`, `function`, `method`
+- Statements:
+  - `let`, `if`, `while`, `do`, `return`
+- Expressões e termos:
+  - operadores aritméticos e lógicos
+  - constantes inteiras, strings e keywords (`true`, `false`, `null`, `this`)
+  - chamadas de função/método (incluindo dispatch por objeto)
+  - acesso e atribuição em arrays
+
+Saída gerada:
+
+- Arquivo `<Nome>.vm` compatível com o VM Emulator (capítulo 11)
+
+---
+
 ## Como Executar
 
 ### Pré-requisitos
@@ -154,12 +181,65 @@ dotnet run --project src/JackAnalyzer -- caminho/para/diretorio/ caminho/saida/
 Para cada arquivo `Nome.jack` processado são gerados:
 - `NomeT.xml` — lista de tokens (saída do Lexer)
 - `Nome.xml` — árvore sintática (saída do Parser)
+- `Nome.vm` — código intermediário para a VM (saída do CodeGen)
+
+---
+
+## Como Executar no VM Emulator
+
+### 1. Gerar arquivos VM de um conjunto oficial
+
+Exemplo com Square (capítulo 11):
+
+```bash
+dotnet run --project src/JackAnalyzer -- nand2tetris/nand2tetris/projects/11/Square output_vm/Square
+```
+
+### 2. Abrir o VM Emulator oficial
+
+No Windows:
+
+```powershell
+.\nand2tetris\nand2tetris\tools\VMEmulator.bat
+```
+
+No VM Emulator:
+
+1. Clique em Load Program
+2. Selecione a pasta gerada (exemplo: `output_vm/Square`)
+3. Carregue o script de teste correspondente do nand2tetris (quando aplicável)
+4. Execute com Run
+
+---
+
+## Roteiro de Apresentação
+
+Sugestão de sequência para apresentação em sala:
+
+1. Contexto do trabalho
+  - objetivo do compilador Jack no nand2tetris
+  - etapas implementadas (lexer, parser e codegen)
+2. Arquitetura do projeto
+  - pasta `Lexer`: tokenização
+  - pasta `Parser`: validação sintática e XML
+  - pasta `CodeGen`: geração VM com SymbolTable e VmWriter
+3. Fluxo de compilação
+  - entrada `.jack`
+  - saídas `.xml` e `.vm`
+4. Demonstração ao vivo
+  - compilar `projects/11/Seven` e `projects/11/Square`
+  - abrir no VM Emulator e executar
+5. Validação
+  - mostrar que os conjuntos principais do capítulo 11 compilam sem erro
 
 ---
 
 ## Testes
 
-Os testes foram realizados com os **arquivos de referência oficiais** do nand2tetris (capítulo 10), comparando a saída gerada com o gabarito usando `Compare-Object` do PowerShell.
+Os testes foram realizados com os arquivos oficiais do nand2tetris.
+
+- Capítulo 10: comparação de XML com os arquivos de referência
+- Capítulo 11: compilação completa dos programas Jack para VM
 
 ### Conjuntos testados
 
@@ -195,3 +275,14 @@ Todos os 6 arquivos XML gerados são **idênticos** aos arquivos de referência 
 | `Main.xml` | ✅ IGUAL | ✅ IGUAL |
 | `Square.xml` | ✅ IGUAL | ✅ IGUAL |
 | `SquareGame.xml` | ✅ IGUAL | ✅ IGUAL |
+
+### Validação do Capítulo 11
+
+Conjuntos compilados com sucesso para `.vm`:
+
+- `Seven`
+- `Average`
+- `ConvertToBin`
+- `Square`
+- `Pong`
+- `ComplexArrays`

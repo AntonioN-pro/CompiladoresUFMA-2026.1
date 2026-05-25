@@ -5,6 +5,7 @@ namespace JackAnalyzer.CodeGen;
 public sealed class VmWriter
 {
     private readonly StringBuilder _code = new();
+    private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
 
     public void WritePush(VmSegment segment, int index) => WriteLine($"push {MapSegment(segment)} {index}");
     public void WritePop(VmSegment segment, int index) => WriteLine($"pop {MapSegment(segment)} {index}");
@@ -19,7 +20,7 @@ public sealed class VmWriter
     public void Save(string outputPath)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath))!);
-        File.WriteAllText(outputPath, _code.ToString(), Encoding.UTF8);
+        File.WriteAllText(outputPath, _code.ToString(), Utf8NoBom);
     }
 
     private void WriteLine(string line) => _code.AppendLine(line);
