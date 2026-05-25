@@ -11,7 +11,8 @@ public class JackTokenizer
 
     // Regex que define o que é cada coisa na linguagem Jack
     private static readonly string TokenPattern = 
-        @"(?<keyword>class|constructor|function|method|field|static|var|int|char|boolean|void|true|false|null|this|let|do|if|else|while|return)|" +
+        // \b evita casar prefixos de keyword dentro de identificadores (ex.: "double").
+        @"(?<keyword>\b(?:class|constructor|function|method|field|static|var|int|char|boolean|void|true|false|null|this|let|do|if|else|while|return)\b)|" +
         @"(?<symbol>[\{\}\(\)\[\]\.,;+\-\*\/&|<>=~])|" +
         @"(?<integerConstant>\d+)|" +
         @"(?<stringConstant>""[^""\n]*"")|" +
