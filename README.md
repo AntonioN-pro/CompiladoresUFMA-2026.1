@@ -15,6 +15,25 @@ A implementação foi desenvolvida com base conceitual fornecida em aula, sendo 
 
 ---
 
+## Próxima Tarefa (Capítulo 11)
+
+Implementar o **gerador de código intermediário** para a linguagem **Jack**, responsável por traduzir a estrutura sintática analisada nas etapas anteriores para código da máquina virtual (`.vm`), compatível com o **VM Emulator** oficial do nand2tetris.
+
+Escopo planejado desta etapa:
+
+1. Integrar a etapa de geração de código ao fluxo atual (Lexer + Parser + Code Generator)
+2. Produzir arquivos `.vm` a partir de arquivos `.jack`
+3. Implementar suporte às construções da linguagem Jack exigidas no projeto 11:
+  - Declarações de classe e sub-rotinas (`constructor`, `function`, `method`)
+  - Variáveis de classe e locais (`static`, `field`, `argument`, `var`)
+  - Comandos `let`, `if`, `while`, `do` e `return`
+  - Expressões, termos, chamadas de função/método e acesso a arrays
+4. Validar a saída `.vm` com os testes oficiais (`Average`, `Seven`, `ConvertToBin`, `Square`, `Pong`, etc.)
+
+Observação: nesta fase, a saída principal passa a ser o arquivo `.vm`; a geração de XML pode ser mantida como apoio de depuração.
+
+---
+
 ## Integrantes
 
 - Gabriel Mesquita Torres - 2022020390

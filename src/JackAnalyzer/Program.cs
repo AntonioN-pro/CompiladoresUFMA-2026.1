@@ -1,4 +1,5 @@
 ﻿using JackAnalyzer.Lexer;
+using JackAnalyzer.CodeGen;
 using JackAnalyzer.Parser;
 using System.Text;
 
@@ -67,6 +68,11 @@ void ProcessarArquivo(string filePath, string? outputDir)
         Path.GetFileNameWithoutExtension(filePath) + ".xml"
     );
 
+    string vmOutputPath = Path.Combine(
+        outputDir,
+        Path.GetFileNameWithoutExtension(filePath) + ".vm"
+    );
+
     GerarTokens(filePath, tokenOutputPath);
 
     var reader = new TokenXmlReader();
@@ -75,7 +81,12 @@ void ProcessarArquivo(string filePath, string? outputDir)
     var parser = new CompilationEngine(tokens);
     parser.CompileToFile(parserOutputPath);
 
-    Console.WriteLine($"{Path.GetFileName(filePath)} → {Path.GetFileName(tokenOutputPath)} e {Path.GetFileName(parserOutputPath)}");
+    var vmCompiler = new VmCompilationEngine(tokens);
+    vmCompiler.CompileToFile(vmOutputPath);
+
+    Console.WriteLine(
+        $"{Path.GetFileName(filePath)} → {Path.GetFileName(tokenOutputPath)}, {Path.GetFileName(parserOutputPath)} e {Path.GetFileName(vmOutputPath)}"
+    );
 }
 
 void GerarTokens(string filePath, string outputPath)
